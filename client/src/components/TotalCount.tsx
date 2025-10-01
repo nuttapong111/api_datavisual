@@ -101,9 +101,6 @@ const TotalCount: React.FC = () => {
           </div>
         </div>
       </div>
-
-
-
     </div>
   );
 };

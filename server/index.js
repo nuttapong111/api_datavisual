@@ -23,6 +23,15 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 const dataRoutes = require('./routes/data');
 const uploadRoutes = require('./routes/upload');
 
+// Simple health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 // Use routes
 app.use('/api/data', dataRoutes);
 app.use('/api/upload', uploadRoutes);
