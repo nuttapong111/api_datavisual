@@ -8,7 +8,10 @@
     "server": "nodemon server/index.js",
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
+    "build:prod": "cd client && npm run build && npm run build:server",
+    "build:server": "echo 'Server build completed'",
     "start": "node server/index.js",
+    "start:prod": "npm run build && node server/index.js",
     "start:all": "./start.sh",
     "test:api": "curl -s http://localhost:3001/api/upload/status",
     "upload:sample": "curl -X POST -F \"file=@sample_data.csv\" http://localhost:3001/api/upload/excel"
