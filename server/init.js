@@ -1,23 +1,21 @@
-const sequelize = require('./config/database');
-const CountryData = require('./models/CountryData');
+const { initializePostgreSQL } = require('./scripts/init-postgres');
 
+// ฟังก์ชันสำหรับเริ่มต้นฐานข้อมูล PostgreSQL
 async function initializeDatabase() {
   try {
-    // ทดสอบการเชื่อมต่อฐานข้อมูล
-    await sequelize.authenticate();
-    console.log('✅ Database connection established successfully.');
+    console.log('🔄 กำลังเริ่มต้นฐานข้อมูล PostgreSQL...');
     
-    // สร้างตาราง (ถ้ายังไม่มี)
-    await sequelize.sync({ force: false });
-    console.log('✅ Database tables synchronized.');
+    const success = await initializePostgreSQL();
     
-    // ตรวจสอบว่ามีข้อมูลหรือไม่
-    const count = await CountryData.count();
-    console.log(`📊 Current data count: ${count} countries`);
-    
-    return true;
+    if (success) {
+      console.log('✅ เริ่มต้นฐานข้อมูลสำเร็จ');
+      return true;
+    } else {
+      console.log('❌ เริ่มต้นฐานข้อมูลล้มเหลว');
+      return false;
+    }
   } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
+    console.error('❌ เกิดข้อผิดพลาดในการเริ่มต้นฐานข้อมูล:', error);
     return false;
   }
 }
