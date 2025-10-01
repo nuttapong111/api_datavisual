@@ -1,0 +1,270 @@
+.file-upload-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.file-upload-container h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Dropzone styles */
+.dropzone {
+  border: 2px dashed #bdc3c7;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.dropzone.active {
+  border-color: #667eea;
+  background: #f0f2ff;
+  transform: scale(1.02);
+}
+
+.dropzone.uploading {
+  cursor: not-allowed;
+  border-color: #3498db;
+  background: #e8f4fd;
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Removed upload-icon styles */
+
+.dropzone-text {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dropzone-hint {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+/* Upload progress */
+.upload-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Status messages - Modern design */
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  position: relative;
+  animation: slideDown 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-message.success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.2);
+  color: #166534;
+}
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+}
+
+.status-message.info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  color: #1e40af;
+}
+
+/* Removed status-icon styles */
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  margin-left: auto;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Upload info - Modern clean design */
+.upload-info {
+  margin-top: 2rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.upload-info h4 {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.upload-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.upload-info li {
+  padding: 0.75rem 1rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 12px;
+  color: #475569;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.2s ease;
+}
+
+.upload-info li:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .file-upload-container {
+    padding: 1.5rem;
+  }
+  
+  .dropzone {
+    padding: 2rem 1rem;
+  }
+  
+  .dropzone-text {
+    font-size: 1rem;
+  }
+  
+  .dropzone-hint {
+    font-size: 0.8rem;
+  }
+  
+  .upload-info ul {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .upload-info li {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .file-upload-container {
+    padding: 1rem;
+  }
+  
+  .dropzone {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .upload-info ul {
+    gap: 0.5rem;
+  }
+  
+  .upload-info li {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}

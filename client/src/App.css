@@ -1,0 +1,425 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Sukhumvit+Set:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Sukhumvit Set', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.App-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  color: #1e293b;
+  padding: 4rem 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.App-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.1) 100%);
+  pointer-events: none;
+}
+
+.App-header h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.App-header p {
+  font-size: 1.25rem;
+  color: #64748b;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+/* Main content */
+.App-main {
+  flex: 1;
+  padding: 3rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Loading and error states */
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container h2 {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.retry-button:hover {
+  background: #5a6fd8;
+}
+
+/* Dashboard */
+.dashboard-container {
+  margin-top: 3rem;
+}
+
+.dashboard-container h2 {
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+  text-align: center;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Layout for different card types */
+.dashboard-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.dashboard-card.half-width {
+  grid-column: span 1;
+}
+
+.dashboard-card.quarter-width {
+  grid-column: span 1;
+}
+
+/* Horizontal layout for stats cards */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Full width for summary chart */
+.summary-chart {
+  grid-column: 1 / -1;
+  margin-bottom: 2rem;
+}
+
+/* Two column layout for countries */
+.countries-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .countries-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #3b82f6 0%, #93c5fd 100%);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.dashboard-card.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Card headers */
+.card-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.card-header h3 {
+  color: #1e293b;
+  font-size: 1.375rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Stats display */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.data-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+/* Charts */
+.chart-container {
+  height: 300px;
+  margin-top: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .countries-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 2rem;
+  }
+  
+  .App-header p {
+    font-size: 1rem;
+  }
+  
+  .dashboard-grid {
+    gap: 1.5rem;
+  }
+  
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .countries-row {
+    gap: 1.5rem;
+  }
+  
+  .data-table {
+    font-size: 0.9rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-main {
+    padding: 1rem 0.5rem;
+  }
+  
+  .dashboard-card {
+    padding: 1rem;
+  }
+  
+  .stats-row {
+    gap: 0.75rem;
+  }
+  
+  .countries-row {
+    gap: 1rem;
+  }
+}
+
+/* Footer */
+.App-footer {
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.App-footer p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.api-endpoints {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.api-endpoints h4 {
+  margin-bottom: 0.5rem;
+  color: #ecf0f1;
+}
+
+.api-endpoints ul {
+  list-style: none;
+  padding: 0;
+}
+
+.api-endpoints li {
+  margin-bottom: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #bdc3c7;
+}
+
+.api-endpoints code {
+  background: #34495e;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  color: #e74c3c;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+
+/* Animation for loading states */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
