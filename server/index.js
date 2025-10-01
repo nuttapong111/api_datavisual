@@ -3,7 +3,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
-const initializeDatabase = require('./init');
 require('dotenv').config();
 
 const app = express();
@@ -62,18 +61,13 @@ app.use((err, req, res, next) => {
 
 // เริ่มต้นเซิร์ฟเวอร์
 async function startServer() {
-  // เริ่มต้นฐานข้อมูล
-  const dbInitialized = await initializeDatabase();
-  if (!dbInitialized) {
-    console.error('❌ Failed to initialize database. Server will not start.');
-    process.exit(1);
-  }
-  
-  // เริ่มต้นเซิร์ฟเวอร์
+  // เริ่มต้นเซิร์ฟเวอร์โดยไม่ต้องรอฐานข้อมูล
   app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
+    console.log(`📊 Health check available at: http://localhost:${PORT}/health`);
+    console.log(`📊 API status available at: http://localhost:${PORT}/api/upload/status`);
     console.log(`🌐 Web interface available at http://localhost:${PORT}`);
+    console.log(`⚠️  Database connection will be initialized when needed`);
   });
 }
 
