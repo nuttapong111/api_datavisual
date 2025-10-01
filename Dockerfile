@@ -11,13 +11,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install all dependencies (including devDependencies for build)
-RUN npm ci
+RUN npm install
 
 # Copy client package files
 COPY client/package*.json ./client/
 
 # Install client dependencies
-RUN cd client && npm ci
+RUN cd client && npm install
 
 # Copy source code
 COPY . .
