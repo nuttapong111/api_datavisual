@@ -14,3 +14,6 @@ cmds = [
 
 [start]
 cmd = "npm run start:prod"
+
+[providers]
+railway = { healthcheckPath = "/health", healthcheckTimeout = 30000 }

@@ -32,6 +32,16 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Alternative health check endpoint for Railway
+app.get('/api/upload/status', (req, res) => {
+  res.status(200).json({ 
+    success: true,
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 // Use routes
 app.use('/api/data', dataRoutes);
 app.use('/api/upload', uploadRoutes);
