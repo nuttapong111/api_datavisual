@@ -105,3 +105,9 @@ Desktop.ini
 tmp/
 temp/
 uploads/
+
+# Git garbage collection
+.git/gc.log
+
+# macOS resource forks
+._*
