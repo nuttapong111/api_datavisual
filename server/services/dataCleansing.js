@@ -58,11 +58,22 @@ class DataCleansingService {
    */
   static async saveCleanedData(cleanedData, originalData = []) {
     try {
+      console.log('Starting to save cleaned data...');
+      console.log('Cleaned data length:', cleanedData.length);
+      
+      // ตรวจสอบการเชื่อมต่อฐานข้อมูล
+      await CountryData.sequelize.authenticate();
+      console.log('Database connection verified');
+      
       // ลบข้อมูลเก่าทั้งหมด
+      console.log('Clearing old data...');
       await CountryData.destroy({ where: {} });
+      console.log('Old data cleared');
       
       // บันทึกข้อมูลใหม่
+      console.log('Creating new records...');
       const result = await CountryData.bulkCreate(cleanedData);
+      console.log('Records created:', result.length);
       
       const removedRows = originalData.length - cleanedData.length;
       
@@ -75,10 +86,16 @@ class DataCleansingService {
       };
     } catch (error) {
       console.error('Error saving cleaned data:', error);
+      console.error('Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
       return {
         success: false,
         message: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
-        error: error.message
+        error: error.message,
+        details: error.name
       };
     }
   }

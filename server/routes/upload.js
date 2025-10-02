@@ -119,6 +119,7 @@ router.post('/excel', upload.single('file'), async (req, res) => {
     
   } catch (error) {
     console.error('Error processing Excel file:', error);
+    console.error('Error stack:', error.stack);
     
     // ลบไฟล์ที่อัปโหลดในกรณีเกิดข้อผิดพลาด
     if (req.file && fs.existsSync(req.file.path)) {
@@ -128,7 +129,8 @@ router.post('/excel', upload.single('file'), async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'เกิดข้อผิดพลาดในการประมวลผลไฟล์',
-      error: error.message
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 });
