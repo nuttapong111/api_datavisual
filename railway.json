@@ -15,7 +15,8 @@
       "variables": {
         "NODE_ENV": "production",
         "PORT": "3001",
-        "DATABASE_URL": "${{Postgres.DATABASE_URL}}"
+        "DATABASE_URL": "${{Postgres.DATABASE_URL}}",
+        "REACT_APP_API_URL": "https://api-looker-dashboard-production.up.railway.app/api"
       }
     }
   }

@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 const dataRoutes = require('./routes/data');
 const uploadRoutes = require('./routes/upload');
 
+// Import database initialization
+const { initializePostgreSQL } = require('./scripts/init-postgres');
+
 // Simple health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
@@ -32,13 +35,32 @@ app.get('/health', (req, res) => {
 });
 
 // Alternative health check endpoint for Railway
-app.get('/api/upload/status', (req, res) => {
-  res.status(200).json({ 
-    success: true,
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  });
+app.get('/api/upload/status', async (req, res) => {
+  try {
+    // ตรวจสอบสถานะฐานข้อมูล
+    const CountryData = require('./models/CountryData');
+    const hasData = await CountryData.count() > 0;
+    
+    res.status(200).json({ 
+      success: true,
+      status: 'OK', 
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      data: {
+        hasData: hasData
+      }
+    });
+  } catch (error) {
+    res.status(200).json({ 
+      success: true,
+      status: 'OK', 
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      data: {
+        hasData: false
+      }
+    });
+  }
 });
 
 // Use routes
@@ -61,14 +83,29 @@ app.use((err, req, res, next) => {
 
 // เริ่มต้นเซิร์ฟเวอร์
 async function startServer() {
-  // เริ่มต้นเซิร์ฟเวอร์โดยไม่ต้องรอฐานข้อมูล
-  app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📊 Health check available at: http://localhost:${PORT}/health`);
-    console.log(`📊 API status available at: http://localhost:${PORT}/api/upload/status`);
-    console.log(`🌐 Web interface available at http://localhost:${PORT}`);
-    console.log(`⚠️  Database connection will be initialized when needed`);
-  });
+  try {
+    // เริ่มต้นฐานข้อมูลก่อน
+    console.log('🔄 กำลังเริ่มต้นฐานข้อมูล...');
+    const dbInitialized = await initializePostgreSQL();
+    
+    if (dbInitialized) {
+      console.log('✅ ฐานข้อมูลพร้อมใช้งาน');
+    } else {
+      console.log('⚠️  ฐานข้อมูลไม่พร้อมใช้งาน แต่เซิร์ฟเวอร์จะยังทำงานได้');
+    }
+    
+    // เริ่มต้นเซิร์ฟเวอร์
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+      console.log(`📊 Health check available at: http://localhost:${PORT}/health`);
+      console.log(`📊 API status available at: http://localhost:${PORT}/api/upload/status`);
+      console.log(`🌐 Web interface available at http://localhost:${PORT}`);
+      console.log(`🗄️  Database: ${dbInitialized ? 'Connected' : 'Not connected'}`);
+    });
+  } catch (error) {
+    console.error('❌ เกิดข้อผิดพลาดในการเริ่มต้นเซิร์ฟเวอร์:', error);
+    process.exit(1);
+  }
 }
 
 startServer();

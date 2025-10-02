@@ -14,7 +14,9 @@
     "start:prod": "npm run build && node server/index.js",
     "start:all": "./start.sh",
     "test:api": "curl -s http://localhost:3001/api/upload/status",
-    "upload:sample": "curl -X POST -F \"file=@sample_data.csv\" http://localhost:3001/api/upload/excel"
+    "upload:sample": "curl -X POST -F \"file=@sample_data.csv\" http://localhost:3001/api/upload/excel",
+    "db:create": "node server/scripts/run-sql.js",
+    "db:init": "node server/scripts/init-postgres.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
