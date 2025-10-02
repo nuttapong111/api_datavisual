@@ -17,7 +17,8 @@
     "upload:sample": "curl -X POST -F \"file=@sample_data.csv\" http://localhost:3001/api/upload/excel",
     "db:create": "node server/scripts/run-sql.js",
     "db:init": "node server/scripts/init-postgres.js",
-    "db:create-railway": "node railway-create-tables.js"
+    "db:create-railway": "node railway-create-tables.js",
+    "force-restart": "node FORCE_RESTART.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
