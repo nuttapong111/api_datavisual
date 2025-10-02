@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 
 // ตั้งค่า database connection สำหรับ PostgreSQL
 const sequelize = new Sequelize(
-  process.env.DATABASE_URL || process.env.DB_URL || 'postgresql://localhost:5432/api_looker',
+  process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || process.env.DB_URL || 'postgresql://localhost:5432/api_looker',
   {
     dialect: 'postgres',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
