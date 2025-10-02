@@ -11,5 +11,5 @@ restartPolicyMaxRetries = 10
 [env]
 NODE_ENV = "production"
 PORT = "3001"
-DATABASE_URL = "${{Postgres.DATABASE_URL}}"
-REACT_APP_API_URL = "https://api-looker-dashboard-production.up.railway.app/api"
+DATABASE_URL = "postgresql://postgres:uWGyYCeOFFMRlexEzJBRjvCgoUWeYtkl@ballast.proxy.rlwy.net:35894/railway"
+REACT_APP_API_URL = "https://web-production-c1c01.up.railway.app/api"
