@@ -1,68 +1,61 @@
-/* Looker Studio Chart Content */
-.looker-chart-content {
+/* Looker Studio Data Table */
+.looker-table-content {
   padding: 0;
 }
 
-/* Year Selector */
-.looker-year-selector {
+/* Table Controls */
+.looker-table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.looker-search-box {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding: 12px 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e8eaed;
 }
 
-.looker-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #3c4043;
-  margin: 0;
-}
-
-.looker-select {
-  padding: 8px 12px;
+.looker-search-input {
+  padding: 8px 12px 8px 36px;
   border: 1px solid #dadce0;
   border-radius: 4px;
   background: #ffffff;
   color: #3c4043;
   font-size: 14px;
   font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  cursor: pointer;
+  width: 250px;
   transition: border-color 0.2s ease;
 }
 
-.looker-select:focus {
+.looker-search-input:focus {
   outline: none;
   border-color: #1a73e8;
   box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
 }
 
-/* Chart Container */
-.looker-chart-container {
-  margin-bottom: 20px;
+.looker-search-icon {
+  position: absolute;
+  left: 12px;
+  color: #5f6368;
+  pointer-events: none;
 }
 
-/* Table Container */
-.looker-table-container {
-  margin-top: 20px;
-}
-
-.looker-table-title {
+.looker-table-info {
   font-size: 14px;
-  font-weight: 500;
-  color: #3c4043;
-  margin: 0 0 16px 0;
-  padding: 0;
+  color: #5f6368;
+  font-weight: 400;
 }
 
+/* Table Wrapper */
 .looker-table-wrapper {
   overflow-x: auto;
   border: 1px solid #e8eaed;
   border-radius: 8px;
   background: #ffffff;
+  margin-bottom: 16px;
 }
 
 .looker-data-table {
@@ -70,15 +63,19 @@
   border-collapse: collapse;
   font-size: 12px;
   font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-width: 800px;
 }
 
 .looker-data-table thead {
   background: #f8f9fa;
   border-bottom: 1px solid #e8eaed;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .looker-data-table th {
-  padding: 12px 16px;
+  padding: 12px 8px;
   text-align: left;
   font-weight: 500;
   color: #3c4043;
@@ -86,6 +83,15 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-right: 1px solid #e8eaed;
+  white-space: nowrap;
+}
+
+.looker-data-table th:first-child {
+  position: sticky;
+  left: 0;
+  background: #f8f9fa;
+  z-index: 2;
+  min-width: 120px;
 }
 
 .looker-data-table th:last-child {
@@ -93,11 +99,22 @@
 }
 
 .looker-data-table td {
-  padding: 12px 16px;
+  padding: 10px 8px;
   border-bottom: 1px solid #f1f3f4;
   border-right: 1px solid #f1f3f4;
   color: #3c4043;
   font-size: 12px;
+  white-space: nowrap;
+}
+
+.looker-data-table td:first-child {
+  position: sticky;
+  left: 0;
+  background: #ffffff;
+  z-index: 1;
+  font-weight: 500;
+  color: #1a73e8;
+  min-width: 120px;
 }
 
 .looker-data-table td:last-child {
@@ -108,32 +125,13 @@
   background: #f8f9fa;
 }
 
-.looker-rank-cell {
-  text-align: center;
-  width: 60px;
-}
-
-.looker-rank-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #e8eaed;
-  color: #5f6368;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.looker-top-three {
-  background: #1a73e8;
-  color: #ffffff;
+.looker-data-table tbody tr:hover td:first-child {
+  background: #f8f9fa;
 }
 
 .looker-country-cell {
   font-weight: 500;
-  color: #3c4043;
+  color: #1a73e8;
 }
 
 .looker-number-cell {
@@ -141,6 +139,44 @@
   font-family: 'Roboto Mono', monospace;
   font-size: 11px;
   color: #5f6368;
+}
+
+/* Pagination */
+.looker-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.looker-pagination-btn {
+  padding: 8px 16px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #3c4043;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.looker-pagination-btn:hover:not(:disabled) {
+  background: #f8f9fa;
+  border-color: #5f6368;
+}
+
+.looker-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.looker-pagination-info {
+  font-size: 14px;
+  color: #5f6368;
+  font-weight: 500;
 }
 
 /* Loading & Error States */
@@ -199,25 +235,24 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .looker-year-selector {
+  .looker-table-controls {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: stretch;
+    gap: 12px;
   }
   
-  .looker-select {
+  .looker-search-input {
     width: 100%;
   }
   
   .looker-data-table th,
   .looker-data-table td {
-    padding: 8px 12px;
+    padding: 8px 6px;
     font-size: 11px;
   }
   
-  .looker-rank-badge {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
+  .looker-pagination {
+    flex-direction: column;
+    gap: 12px;
   }
 }

@@ -103,10 +103,7 @@ const DataSummary: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="data-summary">
-        <div className="card-header">
-          <h3>ข้อมูลสรุปแต่ละปี</h3>
-        </div>
+      <div className="looker-chart-content">
         <div className="loading-state">
           <div className="loading-spinner"></div>
           <p>กำลังโหลดข้อมูล...</p>
@@ -117,10 +114,7 @@ const DataSummary: React.FC = () => {
 
   if (error) {
     return (
-      <div className="data-summary">
-        <div className="card-header">
-          <h3>ข้อมูลสรุปแต่ละปี</h3>
-        </div>
+      <div className="looker-chart-content">
         <div className="error-state">
           <p>{error}</p>
           <button onClick={fetchSummaryData} className="retry-button">
@@ -132,45 +126,20 @@ const DataSummary: React.FC = () => {
   }
 
   return (
-    <div className="data-summary">
-      <div className="card-header">
-        <h3>ข้อมูลสรุปแต่ละปี</h3>
-      </div>
-
-      {/* สถิติรวม */}
-      <div className="summary-stats">
-        <div className="stat-item">
-          <div className="stat-value">{chartData.length}</div>
-          <div className="stat-label">ปีที่วิเคราะห์</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-value">
-            {Math.max(...chartData.map(d => d.count))}
-          </div>
-          <div className="stat-label">จำนวนประเทศ</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-value">
-            {chartData.reduce((sum, d) => sum + d.count, 0)}
-          </div>
-          <div className="stat-label">ข้อมูลทั้งหมด</div>
-        </div>
-      </div>
-
+    <div className="looker-chart-content">
       {/* กราฟแท่งเทียน */}
-      <div className="chart-container">
-        <h4>กราฟแท่งเทียนข้อมูลแต่ละปี</h4>
+      <div className="looker-chart-container">
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e8eaed" />
             <XAxis 
               dataKey="year" 
-              stroke="#666"
+              stroke="#5f6368"
               fontSize={12}
               tick={{ fontSize: 11 }}
             />
             <YAxis 
-              stroke="#666"
+              stroke="#5f6368"
               fontSize={12}
               tickFormatter={(value) => value.toFixed(1)}
               domain={['dataMin - 2', 'dataMax + 2']}
@@ -193,11 +162,12 @@ const DataSummary: React.FC = () => {
               }}
               labelFormatter={(label) => `ปี ${label}`}
               contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #ddd',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e8eaed',
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                fontSize: '12px'
+                boxShadow: '0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15)',
+                fontSize: '12px',
+                fontFamily: 'Google Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
               }}
             />
             
@@ -211,7 +181,7 @@ const DataSummary: React.FC = () => {
             {/* เส้นอ้างอิงค่าเฉลี่ย */}
             <ReferenceLine 
               y={chartData.reduce((sum, d) => sum + d.average, 0) / chartData.length} 
-              stroke="#6b7280" 
+              stroke="#5f6368" 
               strokeDasharray="5 5"
               label={{ value: "ค่าเฉลี่ยรวม", position: "top" }}
             />
@@ -220,13 +190,10 @@ const DataSummary: React.FC = () => {
       </div>
 
       {/* ตารางข้อมูลรายละเอียด */}
-      <div className="summary-table-container">
-        <br></br>
-        <br></br>
-        <br></br>
-        <h4>ข้อมูลรายละเอียดแต่ละปี</h4>
-        <div className="table-wrapper">
-          <table className="data-table">
+      <div className="looker-table-container">
+        <h4 className="looker-table-title">ข้อมูลรายละเอียดแต่ละปี</h4>
+        <div className="looker-table-wrapper">
+          <table className="looker-data-table">
             <thead>
               <tr>
                 <th>ปี</th>
@@ -239,11 +206,11 @@ const DataSummary: React.FC = () => {
             <tbody>
               {chartData.map((item) => (
                 <tr key={item.year}>
-                  <td className="year-cell">{item.year}</td>
-                  <td className="number-cell">{item.min.toFixed(2)}</td>
-                  <td className="number-cell">{item.max.toFixed(2)}</td>
-                  <td className="number-cell average-cell">{item.average.toFixed(2)}</td>
-                  <td className="number-cell">{item.count}</td>
+                  <td className="looker-year-cell">{item.year}</td>
+                  <td className="looker-number-cell">{item.min.toFixed(2)}</td>
+                  <td className="looker-number-cell">{item.max.toFixed(2)}</td>
+                  <td className="looker-number-cell looker-average-cell">{item.average.toFixed(2)}</td>
+                  <td className="looker-number-cell">{item.count}</td>
                 </tr>
               ))}
             </tbody>
@@ -255,3 +222,4 @@ const DataSummary: React.FC = () => {
 };
 
 export default DataSummary;
+

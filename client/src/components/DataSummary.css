@@ -1,167 +1,112 @@
-.data-summary {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e1e8ed;
-}
-
-/* Summary stats grid - Horizontal layout for full width */
-.summary-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-bottom: 2rem;
+/* Looker Studio Chart Content */
+.looker-chart-content {
   padding: 0;
-  width: 100%;
 }
 
-.stat-item {
-  text-align: center;
-  padding: 2rem 1.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+/* Chart Container */
+.looker-chart-container {
+  margin-bottom: 24px;
 }
 
-/* Removed colored bar from stat items */
-
-.stat-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
+/* Table Container */
+.looker-table-container {
+  margin-top: 24px;
 }
 
-.stat-value {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 0.75rem;
-  line-height: 1;
-  position: relative;
-  z-index: 1;
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.looker-table-title {
+  font-size: 14px;
   font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
-
-/* Chart container - Full width layout */
-.chart-container {
-  margin-bottom: 2rem;
+  color: #3c4043;
+  margin: 0 0 16px 0;
   padding: 0;
-  width: 100%;
 }
 
-.chart-container h4 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-/* Summary table - Full width layout */
-.summary-table-container {
-  margin-top: 4rem;
-  padding: 0;
-  width: 100%;
-}
-
-.summary-table-container h4 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-.table-wrapper {
+.looker-table-wrapper {
   overflow-x: auto;
+  border: 1px solid #e8eaed;
   border-radius: 8px;
-  border: 1px solid #e1e8ed;
+  background: #ffffff;
 }
 
-.data-table {
+.looker-data-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  font-size: 12px;
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.data-table th {
+.looker-data-table thead {
   background: #f8f9fa;
-  font-weight: 600;
-  color: #2c3e50;
-  font-size: 0.9rem;
+  border-bottom: 1px solid #e8eaed;
+}
+
+.looker-data-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 500;
+  color: #3c4043;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 1rem 0.75rem;
-  text-align: center;
-  border-bottom: 2px solid #e1e8ed;
+  border-right: 1px solid #e8eaed;
 }
 
-.data-table td {
-  padding: 0.75rem;
-  text-align: center;
+.looker-data-table th:last-child {
+  border-right: none;
+}
+
+.looker-data-table td {
+  padding: 12px 16px;
   border-bottom: 1px solid #f1f3f4;
-  font-size: 0.9rem;
+  border-right: 1px solid #f1f3f4;
+  color: #3c4043;
+  font-size: 12px;
 }
 
-.data-table tbody tr:hover {
+.looker-data-table td:last-child {
+  border-right: none;
+}
+
+.looker-data-table tbody tr:hover {
   background: #f8f9fa;
 }
 
-.data-table tbody tr:nth-child(even) {
-  background: #fafbfc;
+.looker-year-cell {
+  font-weight: 500;
+  color: #1a73e8;
 }
 
-.year-cell {
-  font-weight: 600;
-  color: #2c3e50;
-  background: #f8f9fa !important;
+.looker-number-cell {
+  text-align: right;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
 }
 
-.number-cell {
-  font-family: 'Courier New', monospace;
-  color: #495057;
+.looker-average-cell {
+  font-weight: 500;
+  color: #34a853;
 }
 
-.average-cell {
-  font-weight: bold;
-  color: #3498db;
-  background: #e8f4fd !important;
-}
-
-/* Loading and error states */
+/* Loading & Error States */
 .loading-state,
 .error-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1rem;
+  padding: 48px 24px;
   text-align: center;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e8eaed;
+  border-top: 3px solid #1a73e8;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 @keyframes spin {
@@ -169,80 +114,49 @@
   100% { transform: rotate(360deg); }
 }
 
+.loading-state p {
+  color: #5f6368;
+  font-size: 14px;
+  margin: 0;
+}
+
 .error-state p {
-  color: #e74c3c;
-  margin-bottom: 1rem;
+  color: #d93025;
+  font-size: 14px;
+  margin-bottom: 16px;
 }
 
 .retry-button {
-  background: #667eea;
-  color: white;
+  background: #1a73e8;
+  color: #ffffff;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease;
 }
 
 .retry-button:hover {
-  background: #5a6fd8;
+  background: #1557b0;
 }
 
-/* Responsive design */
-@media (max-width: 1200px) {
-  .summary-stats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-  .summary-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 0 0.5rem;
-  }
-  
-  .stat-item {
-    padding: 1rem 0.5rem;
-  }
-  
-  .stat-value {
-    font-size: 1.5rem;
-  }
-  
-  .stat-label {
-    font-size: 0.8rem;
-  }
-  
-  .chart-container,
-  .summary-table-container {
-    padding: 0;
-  }
-  
-  .data-table {
-    font-size: 0.8rem;
-  }
-  
-  .data-table th,
-  .data-table td {
-    padding: 0.5rem 0.25rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .summary-stats {
+  .looker-summary-stats {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 12px;
+    padding: 12px;
   }
   
-  .data-table {
-    font-size: 0.75rem;
+  .looker-stat-value {
+    font-size: 20px;
   }
   
-  .data-table th,
-  .data-table td {
-    padding: 0.4rem 0.2rem;
+  .looker-data-table th,
+  .looker-data-table td {
+    padding: 8px 12px;
+    font-size: 11px;
   }
 }

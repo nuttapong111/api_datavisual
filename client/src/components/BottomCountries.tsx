@@ -70,19 +70,15 @@ const BottomCountries: React.FC = () => {
   }
 
   return (
-    <div className="bottom-countries">
-      <div className="card-header">
-        <h3>20 ประเทศที่มีค่าต่ำสุด</h3>
-      </div>
-
+    <div className="looker-chart-content">
       {/* เลือกปี */}
-      <div className="year-selector">
-        <label htmlFor="year-select">เลือกปี:</label>
+      <div className="looker-year-selector">
+        <label htmlFor="year-select" className="looker-label">เลือกปี:</label>
         <select 
           id="year-select"
           value={selectedYear} 
           onChange={handleYearChange}
-          className="year-select"
+          className="looker-select"
         >
           {years.map(year => (
             <option key={year} value={year}>{year}</option>
@@ -91,24 +87,23 @@ const BottomCountries: React.FC = () => {
       </div>
 
       {/* กราฟแท่ง */}
-      <div className="chart-container">
-        <h4>กราฟแสดง 10 อันดับแรก</h4>
-        <ResponsiveContainer width="100%" height={400}>
+      <div className="looker-chart-container">
+        <ResponsiveContainer width="100%" height={300}>
           <BarChart 
             data={data.slice(0, 10)} 
             margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e8eaed" />
             <XAxis 
               dataKey="country"
-              stroke="#666"
+              stroke="#5f6368"
               fontSize={11}
               angle={-45}
               textAnchor="end"
               height={100}
             />
             <YAxis 
-              stroke="#666"
+              stroke="#5f6368"
               fontSize={12}
               tickFormatter={(value) => value.toFixed(1)}
               domain={[0, 2.5]}
@@ -117,29 +112,30 @@ const BottomCountries: React.FC = () => {
               formatter={(value: any) => [value.toFixed(2), 'ค่า']}
               labelFormatter={(label) => `ประเทศ: ${label}`}
               contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #ddd',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e8eaed',
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                fontSize: '12px'
+                boxShadow: '0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15)',
+                fontSize: '12px',
+                fontFamily: 'Google Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
               }}
             />
             <Bar 
               dataKey="value" 
-              fill="#ef4444"
+              fill="#ea4335"
               radius={[4, 4, 0, 0]}
-              stroke="#dc2626"
-              strokeWidth={2}
+              stroke="#d33b2c"
+              strokeWidth={1}
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* ตารางข้อมูล */}
-      <div className="countries-table-container">
-        <h4>รายชื่อ 20 ประเทศ</h4>
-        <div className="table-wrapper">
-          <table className="data-table">
+      <div className="looker-table-container">
+        <h4 className="looker-table-title">รายชื่อ 20 ประเทศ</h4>
+        <div className="looker-table-wrapper">
+          <table className="looker-data-table">
             <thead>
               <tr>
                 <th>อันดับ</th>
@@ -150,13 +146,13 @@ const BottomCountries: React.FC = () => {
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.country}>
-                  <td className="rank-cell">
-                    <span className={`rank-badge ${index < 3 ? 'bottom-three' : ''}`}>
+                  <td className="looker-rank-cell">
+                    <span className={`looker-rank-badge ${index < 3 ? 'looker-bottom-three' : ''}`}>
                       {index + 1}
                     </span>
                   </td>
-                  <td className="country-cell">{item.country}</td>
-                  <td className="number-cell">{item.value.toFixed(2)}</td>
+                  <td className="looker-country-cell">{item.country}</td>
+                  <td className="looker-number-cell">{item.value.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>

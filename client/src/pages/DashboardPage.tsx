@@ -4,6 +4,7 @@ import DataSummary from '../components/DataSummary';
 import TopCountries from '../components/TopCountries';
 import BottomCountries from '../components/BottomCountries';
 import TotalCount from '../components/TotalCount';
+import DataTable from '../components/DataTable';
 import { DataService } from '../services/DataService';
 import './DashboardPage.css';
 
@@ -99,139 +100,132 @@ const DashboardPage: React.FC = () => {
   }
 
   return (
-    <div className="dashboard-page">
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="container">
-          <div className="header-content">
-            <div className="breadcrumb">
+    <div className="looker-dashboard">
+      {/* Looker Studio Header */}
+      <header className="looker-header">
+        <div className="looker-header-content">
+          <div className="looker-title-section">
+            <div className="looker-breadcrumb">
               <button 
                 onClick={() => navigate('/')} 
-                className="breadcrumb-link"
+                className="looker-breadcrumb-link"
               >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
                 หน้าแรก
               </button>
-              <span className="breadcrumb-separator">/</span>
-              <span className="breadcrumb-current">Dashboard</span>
+              <span className="looker-breadcrumb-separator">›</span>
+              <span className="looker-breadcrumb-current">Dashboard</span>
             </div>
-            <h1>Dashboard ข้อมูลคุณภาพอากาศ</h1>
+            <h1 className="looker-title">ข้อมูลคุณภาพอากาศ</h1>
+            <p className="looker-subtitle">การวิเคราะห์ข้อมูลคุณภาพอากาศของประเทศต่างๆ</p>
+          </div>
+          <div className="looker-actions">
+            <button 
+              onClick={() => navigate('/import')} 
+              className="looker-btn looker-btn-primary"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="14,2 14,8 20,8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="10,9 9,9 8,9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              อัปโหลดข้อมูล
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="dashboard-main">
-        <div className="container">
-          <div className="dashboard-grid">
-            {/* Stats Row */}
-            <div className="stats-section">
-              <div className="stats-card">
-                <TotalCount />
-              </div>
+      {/* Looker Studio Main Content */}
+      <main className="looker-main">
+        <div className="looker-container">
+          {/* KPI Cards Row */}
+          <div className="looker-kpi-row">
+            <div className="looker-kpi-card">
+              <TotalCount />
             </div>
-            
-            {/* Summary Chart */}
-            <div className="summary-section">
-              <div className="section-header">
-                <h2>ข้อมูลสรุปแต่ละปี</h2>
-              </div>
-              <div className="chart-card">
-                <DataSummary />
-              </div>
-            </div>
-            
-            {/* Countries Section */}
-            <div className="countries-section">
-              <div className="countries-grid">
-                <div className="country-card">
-                  <div className="card-header">
-                    <h3>ประเทศที่มีค่าสูงสุด</h3>
-                  </div>
-                  <div className="card-content">
-                    <TopCountries />
-                  </div>
-                </div>
-                <div className="country-card">
-                  <div className="card-header">
-                    <h3>ประเทศที่มีค่าต่ำสุด</h3>
-                  </div>
-                  <div className="card-content">
-                    <BottomCountries />
-                  </div>
+          </div>
+
+          {/* Charts Grid */}
+          <div className="looker-charts-grid">
+            {/* Main Chart - Full Width */}
+            <div className="looker-chart-card looker-chart-large">
+              <div className="looker-chart-header">
+                <h3>ข้อมูลสรุปแต่ละปี</h3>
+                <div className="looker-chart-actions">
+                  <button className="looker-icon-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
+              <DataSummary />
+            </div>
+
+            {/* Top Countries Chart */}
+            <div className="looker-chart-card">
+              <div className="looker-chart-header">
+                <h3>ประเทศที่มีค่าสูงสุด</h3>
+                <div className="looker-chart-actions">
+                  <button className="looker-icon-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div className="looker-chart-content">
+                <TopCountries />
+              </div>
+            </div>
+
+            {/* Bottom Countries Chart */}
+            <div className="looker-chart-card">
+              <div className="looker-chart-header">
+                <h3>ประเทศที่มีค่าต่ำสุด</h3>
+                <div className="looker-chart-actions">
+                  <button className="looker-icon-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div className="looker-chart-content">
+                <BottomCountries />
+              </div>
+            </div>
+          </div>
+
+          {/* Data Table Section */}
+          <div className="looker-table-section">
+            <div className="looker-table-card">
+              <div className="looker-table-header">
+                <h3>ข้อมูลรายละเอียด</h3>
+                <div className="looker-table-actions">
+                  <button className="looker-btn looker-btn-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <polyline points="7,10 12,15 17,10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    ส่งออก
+                  </button>
+                </div>
+              </div>
+              <DataTable />
             </div>
           </div>
         </div>
       </main>
-
-      {/* API Section */}
-      <section className="api-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>API Endpoints</h2>
-          </div>
-          <div className="api-grid">
-            <div className="api-card">
-              <div className="api-method">GET</div>
-              <div className="api-details">
-                <code>/api/data/summary</code>
-                <span>ข้อมูลสรุปแต่ละปี</span>
-              </div>
-            </div>
-            <div className="api-card">
-              <div className="api-method">GET</div>
-              <div className="api-details">
-                <code>/api/data/top-countries</code>
-                <span>ประเทศที่มีค่ามากสุด</span>
-              </div>
-            </div>
-            <div className="api-card">
-              <div className="api-method">GET</div>
-              <div className="api-details">
-                <code>/api/data/bottom-countries</code>
-                <span>ประเทศที่มีค่าต่ำสุด</span>
-              </div>
-            </div>
-            <div className="api-card">
-              <div className="api-method">GET</div>
-              <div className="api-details">
-                <code>/api/data/total-count</code>
-                <span>จำนวนข้อมูลทั้งหมด</span>
-              </div>
-            </div>
-            <div className="api-card">
-              <div className="api-method">GET</div>
-              <div className="api-details">
-                <code>/api/data/all</code>
-                <span>ข้อมูลทั้งหมด</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="dashboard-footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="navigation-links">
-              <button 
-                onClick={() => navigate('/import')} 
-                className="btn btn-outline"
-              >
-                อัปโหลดข้อมูลใหม่
-              </button>
-              <button 
-                onClick={() => navigate('/')} 
-                className="btn btn-outline"
-              >
-                หน้าแรก
-              </button>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
